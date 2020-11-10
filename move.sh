@@ -14,34 +14,35 @@ tardir=$HOME/.mozilla/firefox/*.$profile/
 cd $tardir && tardir=$(pwd) && cd $currdir
 
 printf "${ORANGE}Copying files from ${NC}$currdir${ORANGE} to ${NC}$tardir\n${NC}"
-printf "${GREEN}Do you confirm? yes or no: ${NC}"
+printf "${GREEN}Are you sure? [y/N] ${NC}"
 read answer
-
-if [[ "$answer" == "yes" || "$answer" == "y" ]] ; then
+if [[ "$answer" =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     if [[ -d $tardir ]] ; then
+        printf "${ORANGE}"
         cp -iv \
             prefsCleaner.sh \
             updater.sh \
             user.js \
             user-overrides.js \
             $tardir
+        printf "${NC}"
     else
         printf "${RED}Error: $tardir not found. Please enter proper name of your firefox profile.\n${NC}"
         exit 1
     fi
 
-    printf "${GREEN}Do you want to run updater.sh? yes or no: ${NC}"
+    printf "${GREEN}Do you want to run updater.sh? [y/N] ${NC}"
     read answer2
 
-    if [[ "$answer2" == "yes" || "$answer2" == "y" ]] ; then
+    if [[ "$answer2" =~ ^([yY][eE][sS]|[yY])$ ]] ; then
         cd $tardir
             sh updater.sh
         cd $currdir
     else
         printf "${RED}user-overrides.js was not updated\n${NC}"
-        exit 1
+        exit 0
     fi
 else
     printf "${RED}Process terminated by user\n${NC}"
-    exit 1
+    exit 0
 fi
