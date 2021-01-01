@@ -42,5 +42,5 @@
    // 0=light, 1=dark : This overrides your OS value
 user_pref("ui.systemUsesDarkTheme", 1); // [HIDDEN PREF]
 
-/* ghacks user.js has all the right privacy respecting preferences and I believe it's best
- * to keep the user-overrides.js file to a minimum
+// ghacks user.js has all the right privacy respecting preferences and I believe it's best
+// to keep the user-overrides.js file to a minimum
